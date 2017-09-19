@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Scramblords</title>
+ 
+  <script src="https://unpkg.com/react@15/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+ 
+  <style>
+	.square{
+		background-color:teal;
+		font-size:26px;
+		font-weight:bold;
+		width:50px;
+		height:50px;
+		text-align:center;
+		margin-top:10px;
+		border-radius: 8px;
+		border: 2px solid #73AD21;
+		line-height:50px;
+	}
+  </style>
+  
+  <script type="text/babel">
+	 
+			
+	
+	
+    class Board extends React.Component {
+		constructor(props) {
+			super(props);
+			this.state = {
+			mode: 1
+			}
+        }
+		
+		render() {
+        return (
+          <div>
+            <Square />			
+          </div>
+        );
+      }
+	}
+	
+	 const Square = (props) => {
+      return (
+        <div className="square" >
+          A
+        </div>
+      );
+    }
+ 
+	
+	
+	 
+	
+	
+    ReactDOM.render(
+      <Board />,
+      document.getElementById("game-content")
+    );
+ 
+  </script>
+</head>
+<body>
+  <div id="game-content"></div>
+</body>
+</html>
