@@ -11,7 +11,7 @@
   <style>
 	.square{
 		background-color:teal;
-		font-size:26px;
+		font-size:40px;
 		font-weight:bold;
 		width:50px;
 		height:50px;
@@ -20,6 +20,20 @@
 		border-radius: 8px;
 		border: 2px solid #73AD21;
 		line-height:50px;
+		float: left;
+		margin-left:2px;
+		user-select: none;  
+		cursor: default;
+	}
+	
+	.square:focus {
+  outline: none;
+}
+	
+	.board-row:after {
+	  clear: both;
+	  content: "";
+	  display: table;
 	}
   </style>
   
@@ -31,24 +45,50 @@
     class Board extends React.Component {
 		constructor(props) {
 			super(props);
+			this.handleLogoutClick = this.handleLogoutClick.bind(this);
 			this.state = {
-			mode: 1
+				curChar: "X",
+				charList: this.generateNewChars()
 			}
         }
 		
+		generateNewChars(){
+			const letters = ["H","I","J","D","E","F","G"];
+			const charlist = Array(16).fill(null);
+			
+			for(let i=0;i<charlist.length;i++){
+				charlist[i] = letters[i];
+			}
+			return charlist;
+		}
+		
+		handleLogoutClick() {
+			this.setState({curChar: "B"});
+		}
+		
 		render() {
         return (
-          <div>
-            <Square />			
+		<div>
+          <div className="board-row">
+            <Square onClick={this.handleLogoutClick} curVal={this.state.charList[0]} />
+			<Square onClick={this.handleLogoutClick} curVal={this.state.charList[1]}/>
+			 
           </div>
+		  
+			<div className="board-row">
+            <Square onClick={this.handleLogoutClick} curVal={this.state.charList[2]} />
+			<Square onClick={this.handleLogoutClick} curVal={this.state.charList[3]}/>
+			 
+          </div>
+		  </div>
         );
       }
 	}
 	
-	 const Square = (props) => {
+	 function Square(props){
       return (
-        <div className="square" >
-          A
+        <div className="square" onClick={props.onClick}>         
+				{props.curVal}			 
         </div>
       );
     }
