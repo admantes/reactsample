@@ -45,7 +45,7 @@
     class Board extends React.Component {
 		constructor(props) {
 			super(props);
-			this.handleLogoutClick = this.handleLogoutClick.bind(this);
+			this.handleClick = this.handleClick.bind(this);
 			this.state = {
 				curChar: "X",
 				charList: this.generateNewChars()
@@ -62,22 +62,23 @@
 			return charlist;
 		}
 		
-		handleLogoutClick() {
+		handleClick(i) {
 			this.setState({curChar: "B"});
+			console.log(this.state.charList[i]);
 		}
 		
 		render() {
         return (
 		<div>
           <div className="board-row">
-            <Square onClick={this.handleLogoutClick} curVal={this.state.charList[0]} />
-			<Square onClick={this.handleLogoutClick} curVal={this.state.charList[1]}/>
+            <Square onClick={i => this.handleClick(i)} curVal={this.state.charList[0]} />
+			<Square onClick={i => this.handleClick(i)} curVal={this.state.charList[1]}/>
 			 
           </div>
 		  
 			<div className="board-row">
-            <Square onClick={this.handleLogoutClick} curVal={this.state.charList[2]} />
-			<Square onClick={this.handleLogoutClick} curVal={this.state.charList[3]}/>
+            <Square onClick={i => this.handleClick(i)} curVal={this.state.charList[2]} />
+			<Square onClick={i => this.handleClick(i)} curVal={this.state.charList[3]}/>
 			 
           </div>
 		  </div>
