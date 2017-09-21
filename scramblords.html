@@ -39,72 +39,6 @@
   
   <script type="text/babel">
 	 
-			
-	
-	
-    class Board extends React.Component {
-		constructor(props) {
-			super(props);
-			this.handleClick = this.handleClick.bind(this);
-			this.state = {
-				curChar: "X",
-				charList: this.generateNewChars(),
-				curWord: "asdf"
-				}
-        }
-		
-		  renderSquare(i) {
-			return (
-			  <Square
-				curVal={this.props.curChar}
-				onClick={() => this.props.onClick(i)}
-			  />
-			);
-		  }
-				
-				
-		generateNewChars(){
-			const letters = ["H","I","J","D","E","F","G"];
-			const charlist = Array(16).fill(null);
-			
-			for(let i=0;i<charlist.length;i++){
-				charlist[i] = letters[i];
-			}
-			return charlist;
-		}
-		
-		handleClick(i) {
-		
-			const clickedLetter = this.state.charList[i];
-		
-		 
-			console.log(this.state.charList[i]);
-			
-			this.setState({
-			curChar: "B",
-			curWord:"Test"
-			});
-			
-		}
-		
-		render() {
-        return (
-		<div>
-			<TextDisplay value={this.state.curWord} />
-			
-			<div className="board-row">
-				{this.renderSquare(0)}
-			 
-          </div>
-		<div className="board-row">
-			  {this.renderSquare(1)}
-			 
-          </div>
-		  </div>
-        );
-      }
-	}
-	
 	 function Square(props){
       return (
         <div className="square" onClick={props.onClick}>         
@@ -122,11 +56,98 @@
 		
 	}
 	
+	class Game extends React.Component{
+		constructor(props) {
+			super(props);
+			this.handleClick = this.handleClick.bind(this);
+			this.state = {
+				curChar: "X",
+				charList: this.generateNewChars(),
+				curWord: "asdf"
+				}
+        }
+	
+		generateNewChars(){
+			const letters = ["H","I","J","D","E","F","G"];
+			const charlist = Array(16).fill(null);
+			
+			for(let i=0;i<charlist.length;i++){
+				charlist[i] = letters[i];
+			}
+			return charlist;
+		}
+		
+			handleClick(i) {
+		
+			const clickedLetter = this.state.charList[i];
+		
+		 
+			console.log(this.state.charList[i]);
+			const word = this.state.curWord + clickedLetter;
+			
+			this.setState({
+				curChar: "B",
+				curWord: word
+			});
+			
+		}
+		
+		render() {
+			return (
+			<div>
+				<TextDisplay value={this.state.curWord} />
+				 <Board
+					charlist={this.state.charList}
+					onClick={i => this.handleClick(i)}
+          />
+				
+			  </div>
+			);
+      }
+	  
+	}
+	
+	
+    class Board extends React.Component {
+	
+		
+		  renderSquare(i) {
+			return (
+			  <Square
+				curVal={this.props.charlist[i]}
+				onClick={() => this.props.onClick(i)}
+			  />
+			);
+		  }
+				
+				
+	
+		 render() {
+    return (
+	
+				<div>
+					<div className="board-row">
+							{this.renderSquare(0)}
+						 
+					  </div>
+					<div className="board-row">
+						  {this.renderSquare(1)}
+						 
+					  </div>
+				  </div>
+					  
+		  );
+  }
+	
+	}
+	
+	
+	
 	 
 	
 	
     ReactDOM.render(
-      <Board />,
+      <Game />,
       document.getElementById("game-content")
     );
  
