@@ -69,67 +69,20 @@
 	
 		generateNewChars(){
 			const letters = ["A","B","C","D","E","F","G","H"];
-			const charlist = Array(16).fill(null);
-			
-			
-			
+			const charlist = Array(16).fill(null);			 
 			
 			for(let i=0;i<charlist.length;i++){
-				charlist[i] = this.newRandomChar();
+				charlist[i] = newRandomChar();
 			}
 			return charlist;
 		}
 		
-		newRandomChar(){
-			const alphabetList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W", "X", "Y"];
-			const vowelLIST1 = ["E", "A",  "I"];
-			const vowelLIST2 = ["O", "U"];
-			const specCharList = ["X", "Z", "Qu", "J"];
-			
-			var pChar = "";
-			var rnd = parseInt(Math.random() * 100);
-			var rnd2 = parseInt(Math.random() * 100);
-			var num = 0;
-			
-		 
-			//Check if prog chooses vowel or consonant			
-			
-			if (rnd < 8 ) {  //VOWEL1
-				pChar = "E";
-					
-			}else if (rnd > 7 && rnd <13) {
-				num = parseInt(Math.random() * 2);
-				pChar = vowelLIST1[num];	
-			}	
-			else if (rnd > 12 && rnd < 21) { //VOWEL2
-				num = parseInt(Math.random() * 1);
-				pChar = vowelLIST2[num];		
-				
-			}else if (rnd > 21 && rnd <40) { // Common Consonants 
-				var commonConsList = ["N", "R","D","T"];
-				num = parseInt(Math.random() * 4);
-				pChar = commonConsList[num];
-				
-			}else if (rnd >39&& rnd < 99) { //Consonant
-				num = parseInt(Math.random()*24);
-				pChar = alphabetList[num];		
-			}else if (rnd == 99) { // Z
-				pChar = "Z";	
-			}else if (rnd == 100) { // Qu			 
-				pChar = "Qu";	
-			}
-			else { 
-				pChar = "E";
-			}
-			 
-			return pChar;			
-		}
 		
 		
-			handleClick(i) {
 		
-			const clickedLetter = this.state.charList[i];
+		handleClick(i) {
 		
+			const clickedLetter = this.state.charList[i];	
 		 
 			console.log(this.state.charList[i]);
 			const word = this.state.curWord + clickedLetter;
@@ -207,6 +160,50 @@
 	}
 	
 	
+		function newRandomChar(){
+			const alphabetList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W", "X", "Y"];
+			const vowelLIST1 = ["E", "A",  "I"];
+			const vowelLIST2 = ["O", "U"];
+			const specCharList = ["X", "Z", "Qu", "J"];
+			
+			var pChar = "";
+			var rnd = parseInt(Math.random() * 100);
+			var rnd2 = parseInt(Math.random() * 100);
+			var num = 0;
+			
+		 
+			//Check if prog chooses vowel or consonant			
+			
+			if (rnd < 8 ) {  //VOWEL1
+				pChar = "E";
+					
+			}else if (rnd > 7 && rnd <13) {
+				num = parseInt(Math.random() * 2);
+				pChar = vowelLIST1[num];	
+			}	
+			else if (rnd > 12 && rnd < 21) { //VOWEL2
+				num = parseInt(Math.random() * 1);
+				pChar = vowelLIST2[num];		
+				
+			}else if (rnd > 21 && rnd <40) { // Common Consonants 
+				var commonConsList = ["N", "R","D","T"];
+				num = parseInt(Math.random() * 4);
+				pChar = commonConsList[num];
+				
+			}else if (rnd >39&& rnd < 99) { //Consonant
+				num = parseInt(Math.random()*24);
+				pChar = alphabetList[num];		
+			}else if (rnd == 99) { // Z
+				pChar = "Z";	
+			}else if (rnd == 100) { // Qu			 
+				pChar = "Qu";	
+			}
+			else { 
+				pChar = "E";
+			}
+			 
+			return pChar;			
+		}
 	
 	 
 	
