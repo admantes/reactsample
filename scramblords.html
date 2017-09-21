@@ -16,7 +16,7 @@
 		width:50px;
 		height:50px;
 		text-align:center;
-		margin-top:10px;
+		margin-top:2px;
 		border-radius: 8px;
 		border: 2px solid #73AD21;
 		line-height:50px;
@@ -48,10 +48,21 @@
 			this.handleClick = this.handleClick.bind(this);
 			this.state = {
 				curChar: "X",
-				charList: this.generateNewChars()
-			}
+				charList: this.generateNewChars(),
+				curWord: "asdf"
+				}
         }
 		
+		  renderSquare(i) {
+			return (
+			  <Square
+				curVal={this.props.curChar}
+				onClick={() => this.props.onClick(i)}
+			  />
+			);
+		  }
+				
+				
 		generateNewChars(){
 			const letters = ["H","I","J","D","E","F","G"];
 			const charlist = Array(16).fill(null);
@@ -63,22 +74,30 @@
 		}
 		
 		handleClick(i) {
-			this.setState({curChar: "B"});
+		
+			const clickedLetter = this.state.charList[i];
+		
+		 
 			console.log(this.state.charList[i]);
+			
+			this.setState({
+			curChar: "B",
+			curWord:"Test"
+			});
+			
 		}
 		
 		render() {
         return (
 		<div>
-          <div className="board-row">
-            <Square onClick={i => this.handleClick(i)} curVal={this.state.charList[0]} />
-			<Square onClick={i => this.handleClick(i)} curVal={this.state.charList[1]}/>
+			<TextDisplay value={this.state.curWord} />
+			
+			<div className="board-row">
+				{this.renderSquare(0)}
 			 
           </div>
-		  
-			<div className="board-row">
-            <Square onClick={i => this.handleClick(i)} curVal={this.state.charList[2]} />
-			<Square onClick={i => this.handleClick(i)} curVal={this.state.charList[3]}/>
+		<div className="board-row">
+			  {this.renderSquare(1)}
 			 
           </div>
 		  </div>
@@ -94,7 +113,14 @@
       );
     }
  
-	
+	function TextDisplay(props){
+		return(
+			<div className="dispText">
+			{props.value}
+			</div>
+		);
+		
+	}
 	
 	 
 	
