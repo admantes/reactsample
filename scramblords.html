@@ -63,12 +63,12 @@
 			this.state = {
 				curChar: "X",
 				charList: this.generateNewChars(),
-				curWord: "asdf"
+				curWord: " "
 				}
         }
 	
 		generateNewChars(){
-			const letters = ["H","I","J","D","E","F","G"];
+			const letters = ["A","B","C","D","E","F","G","H"];
 			const charlist = Array(16).fill(null);
 			
 			for(let i=0;i<charlist.length;i++){
@@ -128,10 +128,15 @@
 				<div>
 					<div className="board-row">
 							{this.renderSquare(0)}
-						 
+							  {this.renderSquare(1)}
+							    {this.renderSquare(2)}
+								  {this.renderSquare(3)}
 					  </div>
 					<div className="board-row">
-						  {this.renderSquare(1)}
+						  {this.renderSquare(4)}
+						    {this.renderSquare(5)}
+							  {this.renderSquare(6)}
+							    {this.renderSquare(7)}
 						 
 					  </div>
 				  </div>
