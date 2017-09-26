@@ -113,6 +113,7 @@
 			
 			if(newTime < 1 ){
 				console.log("Timer has stopped!");
+				clearInterval(this.timer);
 				this.setState({
 					curTime: 0				
 				});
@@ -177,8 +178,18 @@
 		
 		checkClick(){
 			//alert("clicked the button");
+			const isCorrect = dictionary.check(this.state.curWord);
+			//alert(dictionary.check(this.state.curWord));
+			if(isCorrect){
+				alert("Pasok yan");
+			}else{
+				alert("Bano");
+			}
 			
-			alert(dictionary.check(this.state.curWord));
+			this.setState({
+				curWord: ""
+			});
+			
 		}
 		render() {
 			return (
