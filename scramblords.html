@@ -7,9 +7,10 @@
   <script src="https://unpkg.com/react@15/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
   <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
- 
+	<script src="./js/typo.js" > </script>
+	
   <style>
-	.square{
+	.xsquare{
 		background-color:teal;
 		font-size:40px;
 		font-weight:bold;
@@ -41,6 +42,17 @@
 		height:50px;
 		text-align:center;
 	}
+	/*body {
+	  color: #6699CC;
+	  font-size: 22px;
+	  font-family: "Helvetica Neue";
+	  background: linear-gradient(slategray, aquamarine);
+	  text-align: center;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	}*/
+	
 	
 	.board-row:after {
 	  clear: both;
@@ -67,6 +79,60 @@
 		);
 		
 	}
+	
+	function CheckButton(props){
+		return(
+		<button className="checkButton" onClick={props.onClick}>
+			Check
+		</button>
+		);
+	}
+	
+	class Timer extends React.Component{
+		constructor(props){
+			super(props);
+			this.state = {
+				curTime: 5
+				 
+			}
+		}
+		 
+		componentDidMount(){
+			this.startTimer();
+		}
+		startTimer(){
+			this.timer = setInterval(this.tickee, 1000);
+		}
+		
+		tickee = () => {			
+		
+			const newTime = this.state.curTime - 1;
+			
+			if(newTime < 1 ){
+				console.log("Timer has stopped!");
+				this.setState({
+					curTime: 0				
+				});
+			}else{
+				
+				this.setState({
+					curTime: newTime				
+				});
+			}
+		
+		}
+		
+		render(){
+			return(
+			<div className="timer"> 
+				<div className="timerLabel"> Time </div>
+				<div className="timerTime">  {this.state.curTime} </div>
+			</div>
+			);
+		}
+	}
+	
+	
 	
 	class Game extends React.Component{
 		constructor(props) {
@@ -106,13 +172,18 @@
 			
 		}
 		
+		checkClick(){
+			alert("clicked the button");
+		}
 		render() {
 			return (
 			<div>
 				<TextDisplay value={this.state.curWord} />
+				<Timer/>
+				<CheckButton onClick={() => this.checkClick()}/>
 				 <Board
 					charlist={this.state.charList}
-					onClick={()=> this.handleClick(i)}
+					onClick={i=> this.handleClick(i)}
           />
 				
 			  </div>
