@@ -63,6 +63,9 @@
   
   <script type="text/babel">
 	 
+	 var dictionary = new Typo( "en_US" ); 
+	 
+	 
 	 function Square(props){
       return (
         <div className="square" onClick={props.onClick}>         
@@ -173,7 +176,9 @@
 		}
 		
 		checkClick(){
-			alert("clicked the button");
+			//alert("clicked the button");
+			
+			alert(dictionary.check(this.state.curWord));
 		}
 		render() {
 			return (
