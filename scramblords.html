@@ -84,7 +84,7 @@
  
 	function TextDisplay(props){
 		return(
-			<div className={props.className}>
+			<div className="dispText">
 			{props.value}
 			</div>
 		);
@@ -117,7 +117,7 @@
 	
 	function ScoreBox(props){
 		return(
-			<div className="scoreBox">
+			<div className={props.className}>
 				<div className="scoreBoxLabel"> Score </div>
 				<div className="scoreBoxScore"> {props.score} </div>
 			</div>
@@ -252,9 +252,9 @@
 		render() {
 			return (
 			<div>
-				<TextDisplay value={this.state.curWord} className={this.state.textBoxClass}/>
+				<TextDisplay value={this.state.curWord} />
 				<Timer startTime={gameTime}/>				
-				<ScoreBox score={this.state.score} /> 
+				<ScoreBox score={this.state.score} className={this.state.textBoxClass}/> 
 				<CheckButton onClick={() => this.checkClick()}/>
 				<Board
 					charlist={this.state.charList}
