@@ -10,7 +10,7 @@
 	<script src="./js/typo.js" > </script>
 	
   <style>
-	.xsquare{
+	.square{
 		background-color:teal;
 		font-size:40px;
 		font-weight:bold;
@@ -31,7 +31,7 @@
 		outline: none;
 	}
 	
-	.xdispText{
+	.dispText{
 		background-color:#6EA498;
 		font-weight:bold;
 		font-size:28px;
@@ -169,8 +169,7 @@
 		render(){
 			return(
 			<div className="timer"> 
-				<div className="timerLabel"> Time </div>
-				<div className="timerTime">  {this.state.curTime} </div>
+				<div className="timerLabel"> Time <span>{this.state.curTime} </span></div>
 			</div>
 			);
 		}
