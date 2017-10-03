@@ -235,11 +235,16 @@
 			let arr = this.state.clickedArr;
 			let isNeighbor = false;
 			const neighbors = this.state.neighbors;
-			
+			let clickArr = this.state.clickStateArr;
 			//Check if square has not been clicked before
 			if(arr.indexOf(i) > -1){
 				console.log("button has been clicked");
-				this.resetClickParams();
+				if(this.state.lastClicked==i){
+					this.checkClick();
+				}else{
+						this.resetClickParams();
+				}
+				
 				
 			}else{
 				//Check if button is neighbor
@@ -256,12 +261,13 @@
 					arr.push(i);			
 					console.log(this.state.charList[i]);
 					const word = this.state.curWord + clickedLetter;
-					
+					clickArr[i] = 1;
 					this.setState({
 						curChar: "B",
 						curWord: word,
 						lastClicked: i,
-						squareClass: "squareHit"
+						squareClass: "squareHit",
+						clickStateArr: clickArr
 					});
 					this.setNeighbor(i);
 					
@@ -281,7 +287,8 @@
 					clickedArr: Array(),
 					curWord: "",
 					curChar: "",
-					squareClass: "square"
+					squareClass: "square",
+					clickStateArr: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 				});
 		}
 		
@@ -384,7 +391,7 @@
 				<ScoreBox score={this.state.score} className={this.state.textBoxClass}/> 
 				<CheckButton onClick={() => this.checkClick()}/>
 				<Board
-					charlist={this.state.charList} className={this.state.squareClass}
+					charlist={this.state.charList} clickArr={this.state.clickStateArr}
 					onClick={i=> this.handleClick(i)}
           />
 				<WordList words={this.state.words}/>
@@ -398,14 +405,33 @@
     class Board extends React.Component {
 		constructor(props) {
 			super(props);
-		}	
+			
+		}
+		
 		  renderSquare(i) {
-			return (
-			  <Square
-				curVal={this.props.charlist[i]} className={this.props.className}
+const arr = this.props.clickArr;
+		  //	arr = this.props.clickArr;
+			if(arr[i]==0){
+					return(
+					<Square
+				curVal={this.props.charlist[i]} className="square"
 				onClick={() => this.props.onClick(i)}
 			  />
-			);
+			  );
+				
+			}else{
+				return(
+				<Square
+				curVal={this.props.charlist[i]} className="squareHit"
+				onClick={() => this.props.onClick(i)}
+			  />
+			  );
+			}			
+			
+			
+			
+			  
+			
 		  }
 				
 				
