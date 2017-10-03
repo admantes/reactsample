@@ -209,7 +209,8 @@
 				squareClass: "square",
 				lastClicked: -1,
 				clickedArr: Array(),
-				neighbors: Array()
+				neighbors: Array(),
+				clickStateArr: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 				
 				
 			}
@@ -395,8 +396,9 @@
 	
 	
     class Board extends React.Component {
-	
-		
+		constructor(props) {
+			super(props);
+		}	
 		  renderSquare(i) {
 			return (
 			  <Square
