@@ -10,7 +10,7 @@
 	<script src="./js/typo.js" > </script>
 	
   <style>
-	.xsquare{
+	.square{
 		background-color:teal;
 		font-size:40px;
 		font-weight:bold;
@@ -27,11 +27,29 @@
 		cursor: default;
 	}
 	
+	.squareHit{
+		background-color:orange;
+		font-size:40px;
+		font-weight:bold;
+		width:50px;
+		height:50px;
+		text-align:center;
+		margin-top:2px;
+		border-radius: 8px;
+		border: 4px solid red;
+		line-height:50px;
+		float: left;
+		margin-left:2px;
+		user-select: none;  
+		cursor: default;
+	}
+	
+	
 	.square:focus {
 		outline: none;
 	}
 	
-	.xdispText{
+	.dispText{
 		background-color:#6EA498;
 		font-weight:bold;
 		font-size:28px;
@@ -76,7 +94,7 @@
 	 
 	 function Square(props){
       return (
-        <div className="square" onClick={props.onClick}>         
+        <div className={props.className} onClick={props.onClick}>         
 				{props.curVal}			 
         </div>
       );
@@ -188,6 +206,7 @@
 				words: Array(),
 				score: 0,
 				textBoxClass: "",
+				squareClass: "square",
 				lastClicked: -1,
 				clickedArr: Array(),
 				neighbors: Array()
@@ -240,7 +259,8 @@
 					this.setState({
 						curChar: "B",
 						curWord: word,
-						lastClicked: i
+						lastClicked: i,
+						squareClass: "squareHit"
 					});
 					this.setNeighbor(i);
 					
@@ -259,7 +279,8 @@
 					lastClicked: -1	,
 					clickedArr: Array(),
 					curWord: "",
-					curChar: ""
+					curChar: "",
+					squareClass: "square"
 				});
 		}
 		
@@ -322,13 +343,21 @@
 			//Check if entered text is 3 chars or more
 			if(this.state.curWord.length > 2 ){
 				if(isCorrect){ //Check if spelling is corret
-					arr.push(this.state.curWord); 
-					score = score + 50 + (10*this.state.curWord.length);
-					this.setState({
-						words: arr,
-						score: score,
-						textBoxClass: "dispTextGreen"
-					});
+				
+					//Check if word is not found yet
+					if(arr.indexOf(this.state.curWord) == -1){
+						arr.push(this.state.curWord); 
+						score = score + 50 + (10*this.state.curWord.length);
+						this.setState({
+							words: arr,
+							score: score,
+							textBoxClass: "dispTextGreen"
+						});
+					}else{
+						//Word has been found already
+						console.log("Word exists");
+					}
+					
 				}else{
 					//alert("Bano");
 				}
@@ -354,7 +383,7 @@
 				<ScoreBox score={this.state.score} className={this.state.textBoxClass}/> 
 				<CheckButton onClick={() => this.checkClick()}/>
 				<Board
-					charlist={this.state.charList}
+					charlist={this.state.charList} className={this.state.squareClass}
 					onClick={i=> this.handleClick(i)}
           />
 				<WordList words={this.state.words}/>
@@ -371,7 +400,7 @@
 		  renderSquare(i) {
 			return (
 			  <Square
-				curVal={this.props.charlist[i]}
+				curVal={this.props.charlist[i]} className={this.props.className}
 				onClick={() => this.props.onClick(i)}
 			  />
 			);
